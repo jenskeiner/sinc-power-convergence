@@ -14,7 +14,7 @@ package = false
 line-length = 120
 
 [tool.ruff.lint]
-select = ["E4", "E7", "E9", "F", "W", "I", "B", "UP"]
+select = ["E4", "E7", "E9", "F", "W", "I", "B", "UP", "C4", "FURB", "PIE", "PTH", "RUF", "SIM", "S"]
 # Math code: short names like l, I and lambda helpers follow the paper notation.
 ignore = ["E731", "E741", "E743", "UP031"]
 
