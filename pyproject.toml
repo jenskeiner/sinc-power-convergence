@@ -1,0 +1,26 @@
+[project]
+name = "sinc-power-convergence"
+version = "0.1.0"
+description = "Numerics for the paper: The sinc-power window of the NFFT does not always converge"
+requires-python = ">=3.12"
+license = "MIT"
+dependencies = ["mpmath==1.3.0"]
+
+[tool.uv]
+package = false
+
+# Lint and format settings.
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "W", "I", "B", "UP"]
+# Math code: short names like l, I and lambda helpers follow the paper notation.
+ignore = ["E731", "E741", "E743", "UP031"]
+
+[tool.typos.files]
+extend-exclude = ["uv.lock"]
+
+[tool.typos.default.extend-words]
+# Variable name for the number of delta grid values.
+nd = "nd"
