@@ -17,17 +17,9 @@ mp.mp.dps = 50
 type Number = int | float | str | mp.mpf
 
 
-def root(f: Callable[[mp.mpf], mp.mpf], lo: Number, hi: Number, it: int = 130) -> mp.mpf:
-    """Bisection; f(lo) and f(hi) must have opposite signs."""
-    lo, hi = mp.mpf(lo), mp.mpf(hi)
-    slo = f(lo) > 0
-    for _ in range(it):
-        mid = (lo + hi) / 2
-        if (f(mid) > 0) == slo:
-            lo = mid
-        else:
-            hi = mid
-    return (lo + hi) / 2
+def root(f: Callable[[mp.mpf], mp.mpf], lo: Number, hi: Number) -> mp.mpf:
+    """Bisection on [lo, hi]; f(lo) and f(hi) must have opposite signs."""
+    return mp.findroot(f, (mp.mpf(lo), mp.mpf(hi)), solver="bisect", maxsteps=400)
 
 
 # Cramer rate function of U[0,1], Section 4
@@ -40,7 +32,7 @@ def lam(y: Number) -> mp.mpf:
     lo, hi = mp.mpf("1e-30"), mp.mpf(1)
     while g(hi) < 0:
         hi *= 2
-    return root(g, lo, hi, 200)
+    return root(g, lo, hi)
 
 
 def I(y: Number) -> mp.mpf:
@@ -91,7 +83,7 @@ def Phi(theta: Number, m: int, c: Number) -> mp.mpf:
 # Constants of sinc, Section 5
 def _peak(lo: Number, hi: Number) -> mp.mpf:
     """Root of tan x = x, i.e. a local extremum of |sinc|, in (lo, hi)."""
-    return mp.findroot(lambda x: mp.sin(x) - x * mp.cos(x), (lo, hi), solver="anderson")
+    return root(lambda x: mp.sin(x) - x * mp.cos(x), lo, hi)
 
 
 X1 = _peak(4.4, 4.6)  # first sidelobe peak

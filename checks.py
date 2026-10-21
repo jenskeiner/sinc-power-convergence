@@ -75,7 +75,6 @@ def theorem_6_1() -> None:
 
 
 def main() -> None:
-    mp.mp.dps = 40
     lemma_4_1()
     lemma_5_1()
     theorem_6_1()

@@ -24,7 +24,6 @@ class Task(NamedTuple):
 
 
 def job(task: Task) -> float:
-    mp.mp.dps = 50
     c = None if task.a is None else sp.c_of_a(task.sigma, task.a)
     return float(sp.worst_case_error(task.sigma, task.m, c=c)[0])
 
@@ -46,7 +45,6 @@ def einf() -> None:
     tasks = [Task(s, m, a) for sigmas, a in ((SIG_A05, None), (SIG_A03, "0.3")) for s, m in product(sigmas, MS)]
     with Pool() as p:
         e = dict(zip(tasks, p.map(job, tasks, chunksize=1), strict=True))
-    mp.mp.dps = 50
     write(
         "einf_a05.csv",
         ["m", *(f"E_{s}" for s in SIG_A05), *(f"B_{s}" for s in SIG_A05)],
@@ -61,7 +59,6 @@ def einf() -> None:
 
 def rho() -> None:
     """rho(sigma, a) for a = 1/2, 0.35, 0.3 and a*(sigma), sigma - 1 from 1e-3 to 1 (Figure 2)."""
-    mp.mp.dps = 30
     rows = []
     for k in range(61):
         s = 1 + mp.mpf(10) ** (-3 + mp.mpf(k) / 20)
