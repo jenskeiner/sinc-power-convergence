@@ -11,7 +11,9 @@ from operator import itemgetter
 from typing import NamedTuple
 
 import mpmath as mp
+from mpmath import mpf
 
+# Global working precision.
 mp.mp.dps = 50
 
 type Number = int | float | str | mp.mpf
@@ -23,15 +25,17 @@ def root(f: Callable[[mp.mpf], mp.mpf], lo: Number, hi: Number) -> mp.mpf:
 
 
 # Cramer rate function of U[0,1], Section 4
+
 def lam(y: Number) -> mp.mpf:
-    """Tilt lambda_y of (4.5): the tilted U[0,1] has mean y, y in (1/2, 1)."""
+    """lambda_y of (4.5) for a given y in (1/2, 1)."""
+
+    y = mp.mpf(y)
 
     def g(l):
         return 1 / (-mp.expm1(-l)) - 1 / l - y
 
-    lo, hi = mp.mpf("1e-30"), mp.mpf(1)
-    while g(hi) < 0:
-        hi *= 2
+    # Mean of tilt: 1/2 + l/12 >= m(l) > 1 - 1/l, so g(lo) < 0 < g(hi).
+    lo, hi = 3 * (2 * y - 1), 2 / (1 - y)
     return root(g, lo, hi)
 
 
@@ -53,6 +57,7 @@ def tilt_var(y: Number) -> mp.mpf:
 
 
 # Centred cardinal B-spline M_p, supp [-p/2, p/2]
+
 def _run(p: int, y: Number) -> list[mp.mpf]:
     """[M_p(y + j - p/2)]_{j=0..p-1} for y in [0,1). All terms are positive, so no cancellation."""
     a = [mp.mpf(1)]
@@ -63,6 +68,7 @@ def _run(p: int, y: Number) -> list[mp.mpf]:
 
 
 def M(p: int, x: Number) -> mp.mpf:
+    """M_p(x) for x in [-p/2, p/2]."""
     x = mp.mpf(x) + mp.mpf(p) / 2
     if x <= 0 or x >= p:
         return mp.mpf(0)
