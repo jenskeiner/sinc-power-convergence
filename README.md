@@ -4,7 +4,7 @@ Code for the paper
 
 > J. Keiner, *The sinc-power window of the NFFT does not always converge*, 2026.
 
-It computes all numbers, tables and figure data in the paper in 30- to 50-digit
+It computes all numbers, tables and figure data in the paper in 50-digit
 arithmetic with [mpmath](https://mpmath.org). Equation, lemma and theorem numbers
 in the code refer to the paper.
 
@@ -17,9 +17,9 @@ in the code refer to the paper.
 | File | Content |
 |---|---|
 | `sincpow.py` | Library: rate function `I`, B-spline `M`, window `omega`, `Phi`, rates `r`, `rho`, optimal width `astar`, worst-case error `worst_case_error` |
-| `paper_numbers.py` | Prints the numbers in the text, Table 1 and Table 2 (a few seconds) |
-| `checks.py` | Checks Lemma 4.1, Lemma 5.1 and the bounds (6.2), (6.3) of Theorem 6.1 numerically (less than a second) |
-| `figdata.py` | Writes the CSV files in `data/` (about 3 minutes on 10 cores) |
+| `paper_numbers.py` | Prints the numbers in the text, Table 1 and Table 2 (typically takes several seconds) |
+| `checks.py` | Checks Lemma 4.1, Lemma 5.1 and the bounds (6.2), (6.3) of Theorem 6.1 numerically (typically takes about a second) |
+| `figdata.py` | Writes the CSV files in `data/` (typically takes a few minutes on a multi-core machine) |
 
 ## Usage
 
