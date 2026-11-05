@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using these metadata."
+type: software
+title: "sinc-power-convergence: code for the paper 'The sinc-power window of the NFFT does not always converge'"
+abstract: >-
+  Python code with mpmath that computes all numbers, tables and figure data in
+  the paper "The sinc-power window of the NFFT does not always converge" by
+  J. Keiner.
+authors:
+  - family-names: Keiner
+    given-names: Jens
+    orcid: "https://orcid.org/0009-0000-9280-5268"
+version: 1.0-arxiv
+date-released: "2026-11-05"
+license: MIT
+repository-code: "https://github.com/jenskeiner/sinc-power-convergence"
+keywords:
+  - nonequispaced fast Fourier transform
+  - NFFT
+  - window function
+  - sinc-power window
+  - B-spline
+  - error estimate
