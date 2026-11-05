@@ -41,14 +41,14 @@ def sci(x) -> str:
 
 
 def einf() -> None:
-    """E_inf(m) for a = 1/2 with the bound B(m) of Satz 1.8 (Figure 1), and for a = 0.3 (Figure 2)."""
+    """E_inf(m) for a = 1/2 (Figure 1) and for a = 0.3 (Figure 2)."""
     tasks = [Task(s, m, a) for sigmas, a in ((SIG_A05, None), (SIG_A03, "0.3")) for s, m in product(sigmas, MS)]
     with Pool() as p:
         e = dict(zip(tasks, p.map(job, tasks, chunksize=1), strict=True))
     write(
         "einf_a05.csv",
-        ["m", *(f"E_{s}" for s in SIG_A05), *(f"B_{s}" for s in SIG_A05)],
-        ([m, *(sci(e[Task(s, m, None)]) for s in SIG_A05), *(sci(sp.satz_bound(s, m)) for s in SIG_A05)] for m in MS),
+        ["m", *(f"E_{s}" for s in SIG_A05)],
+        ([m, *(sci(e[Task(s, m, None)]) for s in SIG_A05)] for m in MS),
     )
     write(
         "einf_a03.csv",

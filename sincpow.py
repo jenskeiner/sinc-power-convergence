@@ -21,6 +21,8 @@ type Number = int | float | str | mp.mpf
 
 def root(f: Callable[[mp.mpf], mp.mpf], lo: Number, hi: Number) -> mp.mpf:
     """Bisection on [lo, hi]; f(lo) and f(hi) must have opposite signs."""
+    if f(mp.mpf(lo)) * f(mp.mpf(hi)) >= 0:
+        raise ValueError("no sign change on the bracket")
     return mp.findroot(f, (mp.mpf(lo), mp.mpf(hi)), solver="bisect", maxsteps=400)
 
 

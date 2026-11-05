@@ -33,7 +33,7 @@ uv run python figdata.py
 
 | File | Figure | Content |
 |---|---|---|
-| `data/einf_a05.csv` | 1 | `E_<sigma>`: worst-case error for the original window (a = 1/2); `B_<sigma>`: bound of Potts (2003), Satz 1.8 |
+| `data/einf_a05.csv` | 1 | `E_<sigma>`: worst-case error for the original window (a = 1/2) |
 | `data/einf_a03.csv` | 2, right | `E_<sigma>`: worst-case error for a = 0.3 |
 | `data/rho.csv` | 2, left | `s1` = sigma - 1; `R_<a>`: rate rho(sigma, a); `R_star`, `a_star`: optimum of (7.4) |
 
