@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/1426073771.svg)](https://doi.org/10.5281/zenodo.23973987)
+
 # sinc-power-convergence
 
 Code for the paper
